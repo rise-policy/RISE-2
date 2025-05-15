@@ -1,0 +1,91 @@
+robot_type: dual
+
+data:
+  type: wild
+  num_action: 20
+  voxel_size: 0.005
+
+  sample_traj:
+    enable: true
+    trans_delta: 0.005
+    rot_delta: 0.1309
+    width_delta: 0.005
+
+  normalization:
+    trans_min: [-0.9, -0.5, 0.45]
+    trans_max: [0.9, 0.65, 1.6]
+    max_gripper_width: 0.1
+    img_mean: [0.485, 0.456, 0.406]
+    img_std: [0.229, 0.224, 0.225]
+
+  aligner:
+    img_size_resnet: [360, 640]
+    img_size_dinov2: [252, 448]
+    img_coord_size_resnet: [12, 20]
+    img_coord_size_dinov2: [18, 32]
+
+  repeat_dataset: 1
+
+  vis: false
+
+
+train:
+  workspace:
+    min: [-0.7, -0.3, 0.75]
+    max: [0.7, 0.45, 1.4]
+
+  augmentation:
+    point: true
+    aug_trans_min: [-0.2, -0.2, -0.2]
+    aug_trans_max: [0.2, 0.2, 0.2]
+    aug_rot_min: [-30, -30, -30]
+    aug_rot_max: [30, 30, 30]
+
+    color: true
+    aug_color_params: [0.4, 0.4, 0.2, 0.1]
+    aug_color_prob: 0.2
+  
+  lr: 0.0003
+  batch_size: 240
+  num_workers: 24
+  num_steps: 60000
+  save_steps: 2500
+  num_warmup_steps: 2000
+  seed: 233
+
+
+deploy:
+  workspace:
+    min: [-0.7, -0.3, 0.9]
+    max: [0.7, 0.55, 1.55]
+
+  agent:
+    left_robot_serial: Rizon4-062077
+    right_robot_serial: Rizon4R-062016
+    left_gripper_port: /dev/ttyUSB0
+    right_gripper_port: /dev/ttyUSB1
+    camera_serial: "105422061350"
+    gripper_key: width
+
+  max_steps: 3000
+  num_inference_steps: 5
+  gripper_threshold: 0.02
+  ensemble_mode: new
+  seed: 233
+
+  vis: false
+
+
+model:
+  image_enc: dinov2-base
+  cloud_enc_dim: 128
+  image_enc_dim: 128
+  obs_feature_dim: 512
+  hidden_dim: 512
+  nheads: 8
+  num_attn_layers: 4
+  dim_feedforward: 2048
+  dropout: 0.1
+  interp_fn_mode: custom
+  image_enc_finetune: lora
+  image_enc_dtype: float32
