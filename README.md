@@ -4,7 +4,9 @@
 
 **Authors** (for ***RISE*-2**): [Chenxi Wang](https://github.com/chenxi-wang), [Hongjie Fang](https://tonyfang.net/), [Shangning Xia](https://github.com/Xiashangning), [Jingjing Chen](https://github.com/junxix/), [Hao-Shu Fang](https://fang-haoshu.github.io/), [Cewu Lu](https://www.mvig.org/).
 
-This repository contains the full source codes of the ***RISE*-2** policy. 
+This repository contains the full source codes of the ***RISE*-2** policy.
+
+![rise2](assets/images/model.jpg)
 
 ## 🔥 News
 
@@ -78,10 +80,6 @@ Here are the argument explanations in the deployment process:
 - `--config [config_path]`: path to the configuration files.
 - `--ip [ip]`: the IP address of the remote server (required for both server and client of the remote evaluation).
 - `--port [port]`: the port of the remote server (required for both server and client of the remote evaluation).
-
-## 📈 ***RISE*-2** Policy
-
-![rise2](assets/images/model.jpg)
 
 ## 🙏 Acknowledgement
 
