@@ -133,13 +133,7 @@ def evaluate(args_override):
     # set seed
     set_seed(config.deploy.seed)
 
-    # load policy / connect to remote inference service
-    if args.type == "local":
-        from policy import RISE2
-        # set up device
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-    # load policy / connect to remote inference service
+    # load policy for local inference
     if args.type == "local":
         from policy import RISE2
         # set up device
