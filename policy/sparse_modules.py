@@ -48,6 +48,7 @@ class CustomWeightedInterpFn(torch.autograd.Function):
 
         return selected_feats
     
+    @staticmethod
     def backward(ctx, grad_out):
         src_feats, selected_idxs, selected_idxs_expand = ctx.saved_tensors
 
@@ -63,11 +64,10 @@ class CustomWeightedInterpFn(torch.autograd.Function):
 
 
 class WeightedSpatialInterpolation(nn.Module):
-    def __init__(self, mlps, interp_fn_mode = 'custom'):
+    def __init__(self, interp_fn_mode = 'custom'):
         super().__init__()
         assert interp_fn_mode in ['custom', 'naive']
         self.interp_fn_mode = interp_fn_mode
-        self.proj = SharedMLP(mlps)
 
     def forward(
         self, tgt, src, tgt_feats, src_feats, k=3
@@ -103,7 +103,6 @@ class WeightedSpatialInterpolation(nn.Module):
 
         interpolated_feats = torch.stack(interpolated_feats, dim=0).permute(0, 2, 1) # (B, C2, n)
         interpolated_feats = torch.cat([interpolated_feats, tgt_feats], dim=1)  #(B, C2 + C1, n)
-        interpolated_feats = self.proj(interpolated_feats)
 
         return interpolated_feats
 
@@ -177,7 +176,8 @@ class SpatialAligner(nn.Module):
         """
         super().__init__()
         self.out_channels = out_channels
-        self.interp = WeightedSpatialInterpolation(mlps, interp_fn_mode = interp_fn_mode)
+        self.interp = WeightedSpatialInterpolation(interp_fn_mode = interp_fn_mode)
+        self.interp_proj = SharedMLP(mlps)
         self.conv = ResNet14Max(in_channels=mlps[-1], out_channels=out_channels, conv1_kernel_size=3, strides=(4,2,2,2), dilations=(4,1,1,1), bn_momentum=0.02, init_pool=None)
         self.position_embedding = SparsePositionalEncoding(out_channels)
 
@@ -196,8 +196,10 @@ class SpatialAligner(nn.Module):
             image_coord_i = image_coord[i:i+1]
             image_feat_i = image_feat[i].permute(1, 0).unsqueeze(0)
             cloud_feat_i = self.interp(cloud_coord_i.float(), image_coord_i.float(), cloud_feat_i, image_feat_i)
-            cloud_feat_list.append(cloud_feat_i.squeeze(0).permute(1, 0))
-        cloud_feat = torch.cat(cloud_feat_list, dim=0)
+            cloud_feat_list.append(cloud_feat_i)
+        cloud_feat = torch.cat(cloud_feat_list, dim=2)
+        cloud_feat = self.interp_proj(cloud_feat)
+        cloud_feat = cloud_feat.squeeze(0).permute(1, 0)
 
         sinput = ME.SparseTensor(cloud_feat, sinput.C)
         soutput = self.conv(sinput)
