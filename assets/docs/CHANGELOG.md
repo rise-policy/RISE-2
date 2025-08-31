@@ -31,7 +31,7 @@ The visualization of scene 7 for two implementations (download from [video](http
 
 <div align="center">    
     <img src="https://github.com/chenxi-wang/materials/blob/master/RISE-2/assets/gifs/rise2_exp_pour_balls.gif", width="480", alt="pour_balls" />
-    <br> Comparison of RISE-2 performace before and after the fix.
+    <br> Comparison of RISE-2 performance before and after the fix.
 </div>
 
 From the table and video above, we can clearly observe a more stable execution using the fixed version.
