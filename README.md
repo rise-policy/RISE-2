@@ -10,7 +10,7 @@ This repository contains the full source codes of the ***RISE*-2** policy.
 
 ## 🔥 News
 
-- **[Aug 29, 2025]** Fix a bug in Spatial Aligner. After the fix, the model shows improved perfomance compared to the version in paper. We'll provide a report soon.
+- **[Aug 29, 2025]** Fix a bug in Spatial Aligner. After the fix, the model shows improved perfomance compared to the version in paper. See [CHANGELOG](assets/docs/CHANGELOG.md) for a detailed report.
 - **[May 15, 2025]** Initial release.
 
 ## 🛫 Getting Started
