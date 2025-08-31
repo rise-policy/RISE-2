@@ -36,4 +36,4 @@ The visualization of scene 7 for two implementations (download from [video](http
 
 From the table and video above, we can clearly observe a more stable execution using the fixed version.
 
-**NOTE: If you have already trained RISE-2 models using the old implementation and have no time for re-training, you could call ``policy.spatial_aligner.interp.train()`` after ``policy.eval()`` during evaluation to temporarily improve the performace, but it is still a bit unstable compared to the fixed version.**
+**NOTE: If you have already trained RISE-2 models using the old implementation and have no time for re-training, you could call ``policy.spatial_aligner.interp.train()`` after ``policy.eval()`` during evaluation to temporarily improve the performance, but it is still a bit unstable compared to the fixed version.**
