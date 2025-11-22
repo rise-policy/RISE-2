@@ -1,6 +1,6 @@
 # 📈 RISE-2: A Generalizable Policy for Learning from In-the-Wild Demonstrations
 
-[Paper](https://arxiv.org/abs/2503.03081) | [Project Page](http://airexo.tech/airexo2/) | [***AirExo*-2** Codebase](https://github.com/AirExo/AirExo-2)
+[Paper](https://arxiv.org/abs/2503.03081) | [Project Page](http://airexo.tech/airexo2/) | [Sample Data](https://drive.google.com/drive/folders/1xfJgn1qVLBgNhaFq7sbE6C6ylM6zZS9p) | [***AirExo*-2** Codebase](https://github.com/AirExo/AirExo-2)
 
 **Authors** (for ***RISE*-2**): [Chenxi Wang](https://github.com/chenxi-wang), [Hongjie Fang](https://tonyfang.net/), [Shangning Xia](https://github.com/Xiashangning), [Jingjing Chen](https://github.com/junxix/), [Hao-Shu Fang](https://fang-haoshu.github.io/), [Cewu Lu](https://www.mvig.org/).
 

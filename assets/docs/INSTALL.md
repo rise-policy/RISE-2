@@ -43,6 +43,18 @@ Please follow the instructions to install the conda environments and the depende
     ```
     mkdir weights
     ```
+    Download the pretrained models from [v2](https://huggingface.co/facebook/dinov2-base/tree/main)/[v3](https://huggingface.co/facebook/dinov3-vitb16-pretrain-lvd1689m/tree/main) and put them into corresponding folders. The folder structure is as follows:
+
+    ```bash
+    RISE-2/
+    |-- ...
+    `-- weights/
+        |-- dinov2-base/
+        |   |-- model.safetensors
+        |   |-- ...
+        |   `-- config.json
+        `-- dinov3-base/
+    ```
 
 
 ## 🦾 Real Robot

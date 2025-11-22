@@ -72,8 +72,8 @@ class ResNetEncoder(nn.Module):
         return feats
 
 
-class DINOv2Encoder(nn.Module):
-    """DINOv2 backbone with optional LoRA fine-tuning."""
+class DINOEncoder(nn.Module):
+    """DINOv2/v3 backbone with optional LoRA fine-tuning."""
     def __init__(
         self, 
         name: str = "dinov2-base", 
@@ -86,14 +86,17 @@ class DINOv2Encoder(nn.Module):
         super().__init__()
         assert finetune in ["full", "lora", "none"], "finetune parameter should be one of [full, lora, none]."
         
-        dino = AutoModel.from_pretrained(os.path.join("./weights", name), torch_dtype = dtype)
+        dino = AutoModel.from_pretrained(os.path.join("./weights", name), dtype = dtype)
+        self.num_register_tokens = 0 if name.startswith("dinov2") else dino.config.num_register_tokens
 
         if finetune == "lora":
+            target_modules = ['projection', 'query', 'key', 'value', 'dense', 'fc1', 'fc2'] if name.startswith("dinov2") \
+                else ['patch_embeddings', 'q_proj', 'k_proj', 'v_proj', 'o_proj', 'up_proj', 'down_proj']
             dino.requires_grad_(False)
             config = LoraConfig(
                 r              = lora_rank,
                 lora_alpha     = lora_rank,
-                target_modules = ['projection', 'query', 'key', 'value', 'dense', 'fc1', 'fc2'],
+                target_modules = target_modules,
                 lora_dropout   = lora_dropout,
                 bias           = 'none',
                 use_rslora     = True,
@@ -120,7 +123,7 @@ class DINOv2Encoder(nn.Module):
     def forward(self, img):
         H, W = img.shape[-2:]
         grid_H, grid_W = H // self.patch_size, W // self.patch_size
-        feats = self.model(img).last_hidden_state[:, 1:] # B, L, hidden_size
+        feats = self.model(img).last_hidden_state[:, 1 + self.num_register_tokens:] # B, L, hidden_size
         feats = self.proj(feats)    # B, L, num_channels
         feats = feats.reshape(-1, grid_H, grid_W, self.num_channels).permute(0, 3, 1, 2)
 

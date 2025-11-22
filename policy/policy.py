@@ -5,7 +5,7 @@ from torch.amp import autocast
 from policy.transformer import Transformer
 from policy.diffusion import DiffusionUNetPolicy
 from policy.sparse_modules import SparseEncoder, SpatialAligner
-from policy.dense_modules import DINOv2Encoder, ResNetEncoder
+from policy.dense_modules import DINOEncoder, ResNetEncoder
 
 
 class RISE2(nn.Module):
@@ -39,7 +39,7 @@ class RISE2(nn.Module):
         if image_enc.startswith("resnet"):
             self.dense_encoder = ResNetEncoder(image_enc, image_enc_dim, finetune = image_enc_finetune)
         elif image_enc.startswith("dino"):
-            self.dense_encoder = DINOv2Encoder(image_enc, image_enc_dim, finetune = image_enc_finetune, dtype = self.image_enc_dtype)
+            self.dense_encoder = DINOEncoder(image_enc, image_enc_dim, finetune = image_enc_finetune, dtype = self.image_enc_dtype)
 
     def generate_attn_mask(self, obs_token_len, readout_len = 1):
         mask_size = obs_token_len + readout_len
