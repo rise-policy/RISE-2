@@ -131,9 +131,12 @@ class RealWorldDataset(Dataset):
         if image_enc == "resnet18":
             self.img_size = config.data.aligner.img_size_resnet
             self.img_coord_size = config.data.aligner.img_coord_size_resnet
-        elif image_enc.startswith("dino"):
+        elif image_enc.startswith("dinov2"):
             self.img_size = config.data.aligner.img_size_dinov2
             self.img_coord_size = config.data.aligner.img_coord_size_dinov2
+        elif image_enc.startswith("dinov3"):
+            self.img_size = config.data.aligner.img_size_dinov3
+            self.img_coord_size = config.data.aligner.img_coord_size_dinov3
         else:
             raise ValueError(f"Unknown image encoder: {image_enc}")
         self.repeat_dataset = config.data.repeat_dataset

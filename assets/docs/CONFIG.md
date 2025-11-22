@@ -26,7 +26,7 @@ data:
   aligner:
     img_size_resnet: [360, 640]  # image size for resnet dense encoder
     img_size_dinov2: [252, 448]  # image size for DINOv2 dense encoder
-    img_size_dinov2: [288, 512]  # image size for DINOv2 dense encoder
+    img_size_dinov3: [288, 512]  # image size for DINOv3 dense encoder
     img_coord_size_resnet: [12, 20]  # image coordinate size for resnet dense encoder
     img_coord_size_dinov2: [18, 32]  # image coordinate size for DINOv2 dense encoder
     img_coord_size_dinov3: [18, 32]  # image coordinate size for DINOv3 dense encoder

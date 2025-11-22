@@ -180,9 +180,12 @@ def evaluate(args_override):
     if image_enc == "resnet18":
         img_size = config.data.aligner.img_size_resnet
         img_coord_size = config.data.aligner.img_coord_size_resnet
-    elif image_enc.startswith("dino"):
+    elif image_enc.startswith("dinov2"):
         img_size = config.data.aligner.img_size_dinov2
         img_coord_size = config.data.aligner.img_coord_size_dinov2
+    elif image_enc.startswith("dinov3"):
+        img_size = config.data.aligner.img_size_dinov3
+        img_coord_size = config.data.aligner.img_coord_size_dinov3
     else:
         raise ValueError(f"Unknown image encoder: {image_enc}")
     
