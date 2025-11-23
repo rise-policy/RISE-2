@@ -9,8 +9,8 @@ sed -i 's/\bauto __raw = __to_address(__r.get());/auto __raw = std::__to_address
 
 We also support the new [DINOv3](https://arxiv.org/abs/2508.10104) backbone as the dense encoder and simply test the performance on the "pour balls" task. The training and evaluation share the same settings with the experiments before (fix on Aug 29, 2025). During evaluation, we test the out-of-domain performance of DINOv2/v3 backbone in two levels:
 
-- Level 1: Novel cup and bowl 1.
-- Level 2: Novel cup, bowl 2 (smaller) and table.
+- Level 1: novel cup and bowl 1.
+- Level 2: novel cup, bowl 2 (smaller) and table.
 
 The parameter numbers and inference time are approximately the same for the two backbones. Average completion rates over ten scenes are as follows:
 
@@ -25,7 +25,7 @@ The parameter numbers and inference time are approximately the same for the two 
 
 The DINOv3 backbone generalizes better than the previous version on this task. Welcome to make comparisons on your own tasks and share the results with us.
 
-We would like to thank Xiyan Huang for carrying out the experiments.
+We would like to thank [Xiyan Huang](https://github.com/OrigamiOuO) for carrying out the experiments.
 
 ## [Aug 29, 2025] Fix a bug in Spatial Aligner.
 
