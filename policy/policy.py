@@ -59,6 +59,12 @@ class RISE2(nn.Module):
         if self.image_enc_dtype != torch.float32:
             image_feat = image_feat.to(torch.float32)
 
+        # check shapes of image_feat and image_coord
+        if not image_feat.shape[2:4] == image_coord.shape[2:4]:
+            raise ValueError(
+                f"Shape mismatch of image_feat ({image_feat.shape[2:4]}) and image_coord ({image_coord.shape[2:4]})!"
+            )
+
         image_feat = image_feat.flatten(2).permute(0, 2, 1)
         image_coord = image_coord.flatten(2).permute(0, 2, 1)
 
