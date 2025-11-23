@@ -75,7 +75,7 @@ class RealWorldDataset(Dataset):
             # get frame ids
             frame_ids, _ = self.traj_loader.load_traj(demo_path)
             # get projectors
-            calib_timestamp, cam_ids = self.register_projector(self.data_path, self.calib_path)
+            calib_timestamp, cam_ids = self.register_projector(demo_path, self.calib_path)
             for cam_id in cam_ids:
                 # path
                 cam_path = os.path.join(demo_path, "cam_{}".format(cam_id))
