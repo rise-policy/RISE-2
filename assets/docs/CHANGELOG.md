@@ -1,5 +1,32 @@
 # 📝 Changelog
 
+## [Nov 23, 2025] Support CUDA 12.8 and DINOv3 backbone.
+
+We update [the installation guide](INSTALL.md) for MinkowskiEngine compilation with CUDA 12.8. To compile MinkowskiEngine using CUDA 12.8, you should clone or update [the source code](https://github.com/chenxi-wang/MinkowskiEngine) and execute the following command before installation:
+```bash
+sed -i 's/\bauto __raw = __to_address(__r.get());/auto __raw = std::__to_address(__r.get());/' /usr/include/c++/11/bits/shared_ptr_base.h
+```
+
+We also support the new [DINOv3](https://arxiv.org/abs/2508.10104) backbone as the dense encoder and simply test the performance on the "pour balls" task. The training and evaluation share the same settings with the experiments before (fix on Aug 29, 2025). During evaluation, we test the out-of-domain performance of DINOv2/v3 backbone in two levels:
+
+- Level 1: Novel cup and bowl 1.
+- Level 2: Novel cup, bowl 2 (smaller) and table.
+
+The parameter numbers and inference time are approximately the same for the two backbones. Average completion rates over ten scenes are as follows:
+
+<div align="center">
+
+| Backbone | Level 1 | Level 2 |
+|:---:|:---:|:---:|
+| DINOv2 (base) | **0.9** | 0.45 |
+| DINOv3 (base) | 0.8 | **0.8** |
+
+</div>
+
+The DINOv3 backbone generalizes better than the previous version on this task. Welcome to make comparisons on your own tasks and share the results with us.
+
+We would like to thank Xiyan Huang for carrying out the experiments.
+
 ## [Aug 29, 2025] Fix a bug in Spatial Aligner.
 
 Due to unfixed point numbers of each point cloud in a batch, we apply WeightedSpatialInterpolation to each sample iteratively. However, in the original implementation in paper, MLP layers are also included in this module, which adopts BatchNorm as the normalization function. Multiple forwarding of the same BN during one training step hinders the model stability and leads to failure in some extreme cases. After the fix, the model shows improved performance.

@@ -9,7 +9,7 @@ This repository contains the full source codes of the ***RISE*-2** policy.
 ![rise2](assets/images/model.jpg)
 
 ## 🔥 News
-- **[Nov 23, 2025]** Support DINOv3 backbone. Support CUDA 12.8. See [CHANGELOG](assets/docs/CHANGELOG.md) for a detailed report.
+- **[Nov 23, 2025]** Support CUDA 12.8 and DINOv3 backbone. See [CHANGELOG](assets/docs/CHANGELOG.md) for a detailed report.
 - **[Aug 29, 2025]** Fix a bug in Spatial Aligner. After the fix, the model shows improved perfomance compared to the version in paper. See [CHANGELOG](assets/docs/CHANGELOG.md) for a detailed report.
 - **[May 15, 2025]** Initial release.
 
