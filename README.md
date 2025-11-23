@@ -1,6 +1,6 @@
 # 📈 RISE-2: A Generalizable Policy for Learning from In-the-Wild Demonstrations
 
-[Paper](https://arxiv.org/abs/2503.03081) | [Project Page](http://airexo.tech/airexo2/) | [***AirExo*-2** Codebase](https://github.com/AirExo/AirExo-2)
+[Paper](https://arxiv.org/abs/2503.03081) | [Project Page](http://airexo.tech/airexo2/) | [Sample Data](https://drive.google.com/drive/folders/1xfJgn1qVLBgNhaFq7sbE6C6ylM6zZS9p) | [***AirExo*-2** Codebase](https://github.com/AirExo/AirExo-2)
 
 **Authors** (for ***RISE*-2**): [Chenxi Wang](https://github.com/chenxi-wang), [Hongjie Fang](https://tonyfang.net/), [Shangning Xia](https://github.com/Xiashangning), [Jingjing Chen](https://github.com/junxix/), [Hao-Shu Fang](https://fang-haoshu.github.io/), [Cewu Lu](https://www.mvig.org/).
 
@@ -9,7 +9,7 @@ This repository contains the full source codes of the ***RISE*-2** policy.
 ![rise2](assets/images/model.jpg)
 
 ## 🔥 News
-
+- **[Nov 23, 2025]** Support CUDA 12.8 and DINOv3 backbone. See [CHANGELOG](assets/docs/CHANGELOG.md) for a detailed report.
 - **[Aug 29, 2025]** Fix a bug in Spatial Aligner. After the fix, the model shows improved perfomance compared to the version in paper. See [CHANGELOG](assets/docs/CHANGELOG.md) for a detailed report.
 - **[May 15, 2025]** Initial release.
 

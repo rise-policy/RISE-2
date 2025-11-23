@@ -5,7 +5,7 @@ from torch.amp import autocast
 from policy.transformer import Transformer
 from policy.diffusion import DiffusionUNetPolicy
 from policy.sparse_modules import SparseEncoder, SpatialAligner
-from policy.dense_modules import DINOv2Encoder, ResNetEncoder
+from policy.dense_modules import DINOEncoder, ResNetEncoder
 
 
 class RISE2(nn.Module):
@@ -39,7 +39,7 @@ class RISE2(nn.Module):
         if image_enc.startswith("resnet"):
             self.dense_encoder = ResNetEncoder(image_enc, image_enc_dim, finetune = image_enc_finetune)
         elif image_enc.startswith("dino"):
-            self.dense_encoder = DINOv2Encoder(image_enc, image_enc_dim, finetune = image_enc_finetune, dtype = self.image_enc_dtype)
+            self.dense_encoder = DINOEncoder(image_enc, image_enc_dim, finetune = image_enc_finetune, dtype = self.image_enc_dtype)
 
     def generate_attn_mask(self, obs_token_len, readout_len = 1):
         mask_size = obs_token_len + readout_len
@@ -58,6 +58,12 @@ class RISE2(nn.Module):
         
         if self.image_enc_dtype != torch.float32:
             image_feat = image_feat.to(torch.float32)
+
+        # check shapes of image_feat and image_coord
+        if not image_feat.shape[2:4] == image_coord.shape[2:4]:
+            raise ValueError(
+                f"Shape mismatch of image_feat ({image_feat.shape[2:4]}) and image_coord ({image_coord.shape[2:4]})!"
+            )
 
         image_feat = image_feat.flatten(2).permute(0, 2, 1)
         image_coord = image_coord.flatten(2).permute(0, 2, 1)

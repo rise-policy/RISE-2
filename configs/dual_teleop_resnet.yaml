@@ -21,8 +21,10 @@ data:
   aligner:
     img_size_resnet: [360, 640]
     img_size_dinov2: [252, 448]
+    img_size_dinov3: [288, 512]
     img_coord_size_resnet: [12, 20]
     img_coord_size_dinov2: [18, 32]
+    img_coord_size_dinov3: [18, 32]
 
   repeat_dataset: 1
   

@@ -106,7 +106,7 @@ def train(args_override):
 
     # load checkpoint
     if args.resume_ckpt is not None:
-        policy.module.load_state_dict(torch.load(args.resume_ckpt, map_location = device), strict = False)
+        policy.module.load_state_dict(torch.load(args.resume_ckpt, map_location = device, weights_only = True), strict = False)
         if RANK == 0:
             print("Checkpoint {} from step {} loaded.".format(args.resume_ckpt, args.resume_step))
 
